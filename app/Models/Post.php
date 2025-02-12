@@ -28,4 +28,9 @@ class Post extends Model
         return $this->belongsToMany(User::class, 'votes');
     }
 
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class);
+    }
+
 }

@@ -18,9 +18,6 @@
             <span class="font-medium">¡Error! </span>{{ session('error') }}
         </div>
     @endif
-    <h2 class="font-semibold text-2xl text-black-900 leading-tight">
-        Tus publicaciones son:
-    </h2>
 
   <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -42,6 +39,8 @@
                                   <th scope="col" class="px-6 py-3">Título</th>
                                   <th scope="col" 
 class="px-6 py-3 text-right">Fecha Publicación</th>
+                                  <th scope="col" 
+class="px-6 py-3 text-right">Tema</th>
                               </tr>
                           </thead>
                           <tbody>
@@ -54,6 +53,9 @@ class="px-6 py-3 text-right">Fecha Publicación</th>
                                   </td>
                                   <td class="px-6 py-3 text-right">
                                       {{ \Carbon\Carbon::parse($post->published_at)->format('d/m/Y') }}
+                                  </td>
+                                  <td class="px-6 py-3 text-right">
+                                      {{ $post->topic->name }}
                                   </td>
                               </tr>
                               @endforeach

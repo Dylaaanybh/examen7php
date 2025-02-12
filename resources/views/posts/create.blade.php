@@ -5,7 +5,6 @@
     </h2>
   </x-slot>
 
-
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -23,8 +22,8 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                         focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
                        
-                       
-                      @error('title') border-red-600 @enderror" required>
+
+                        @error('title') border-red-600 @enderror" required>
                 @error('title')
                   <div class="text-sm bg-red-200 px-3 py-1 rounded-lg">
                     {{ $message }}
@@ -39,7 +38,7 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                       focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
                      
-                     
+
                       @error('summary') border-red-600 @enderror">
 		    {{ old('summary') }}
 </textarea>
@@ -57,7 +56,7 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                       focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
                      
-                     
+
                       @error('body') border-red-600 @enderror" required>
 	{{ old('body') }}
 </textarea>
@@ -84,12 +83,32 @@
                   </div>
                 @enderror                      
               </div>
+              <div class="mb-5">
+                <label for="topic_id"
+                  class="block mb-2 text-sm font-medium text-gray-900"
+                  >Tema:</label>
+                <select name="topic_id" id="topic_id"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                      focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+                     
+
+                      @error('topic_id') border-red-600 @enderror" required>
+                  @foreach($topics as $topic)
+                    <option value="{{ $topic->id }}">{{ $topic->name }}</option>
+                  @endforeach
+                </select>
+                @error('topic_id')
+                  <div class="text-sm bg-red-200 px-3 py-1 rounded-lg">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
               <button type="submit"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
-                    focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 
-    py-2.5 text-center
-   "
-                >Crear</button>
+                focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto
+                px-5 py-2.5 text-center">
+                Guardar
+              </button>
             </form>
           </div>
         </div>

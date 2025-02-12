@@ -36,6 +36,7 @@
                   {{ $post->user->name }}
                 </span>
               </span>
+              
             </div>
             <div class="m-3 text-right">
               <a class="text-sm bg-blue-200 p-2 rounded-xl" href="{{ Route('posts.read', $post->id)}}">

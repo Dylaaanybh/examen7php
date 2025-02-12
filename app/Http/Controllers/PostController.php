@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Topic;
 
 
 class PostController extends Controller
@@ -23,7 +24,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $topics = Topic::all();
+        return view('posts.create', compact('topics'));
     }
 
     public function read(int $id)
