@@ -69,15 +69,35 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Post $post)
-    {
-        //
+    {    
+        if ($post->user_id !== auth()->id()) {
+            return redirect()->route('posts.index')->with('error', 'No puedes modificar esta publicación');
+        }
+        if ($post->user_id == Auth::id()) {
+            $validated = $request->validate([
+                'title' => 'required|unique:posts|min:3|max:255',
+                'summary' => 'max:2000',
+                'body' => 'required',
+                'published_at' => 'required|date',
+            ]);
+            $post->title = $validated['title'];
+            $post->summary = $validated['summary'];
+            $post->body = $validated['body'];
+            $post->published_at = $validated['published_at'];
+            $post->save();
+            return redirect()->route('posts.index')
+                    ->with('success', 'Publicación actualizada correctamente.');
+        } else {
+            return redirect()->route('posts.index')
+                    ->with('error', 'No puedes editar una publicación de la que no eres el autor.');
+        }
     }
 
     /**
